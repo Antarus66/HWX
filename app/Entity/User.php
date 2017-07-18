@@ -36,4 +36,9 @@ class User extends Authenticatable implements AuthenticatableInterface
     {
         return $this->hasMany(Car::class);
     }
+
+    public function isAdmin()
+    {
+        return false;
+    }
 }

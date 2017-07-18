@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Api;
 
 class CarController extends \App\Http\Controllers\Api\Admin\CarController
 {
+    public function __construct(CarManager $carManager)
+    {
+        $this->carManager = $carManager;
+        $this->middleware('auth');
+    }
+
     /**
      * Return list of accessible cars
      * @return \Illuminate\Http\JsonResponse

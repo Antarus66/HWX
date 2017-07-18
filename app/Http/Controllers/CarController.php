@@ -6,6 +6,7 @@ use App\Entity\Car;
 //use App\Http\Requests\ValidatedCarRequest;
 //use App\Repositories\Contracts\CarRepositoryInterface;
 use App\Manager\CarManager;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -37,6 +38,15 @@ class CarController extends Controller
      */
     public function create()
     {
+        $car = new Car();
+
+        try {
+            $this->authorize('create', $car); // permission check
+        } catch (AuthorizationException $e) {
+            // Access denied
+            return redirect('/');
+        }
+
         return view('cars/create');
     }
 
