@@ -12,12 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'cars'], function () {
     Route::get('/', 'CarController@index')->name('car-list');
