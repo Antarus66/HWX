@@ -45,27 +45,32 @@ class CarManager implements CarManagerContract
     /**
      * Create or Update Car
      *
-     * @param SaveCarRequest $request
+     * @param Request $request
      * @return Car
      */
-    public function saveCar(Request $request): Car
+    public function saveCar(Request $request, $id = null): Car
     {
-        $data = [
-            'color' => $request->getColor(),
-            'model' => $request->getModel(),
-            'registration_number' => $request->getRegistrationNumber(),
-            'year' => $request->getYear(),
-            'mileage' => $request->getMileage(),
-            'price' => $request->getPrice(),
-        ];
+        $data = $request->only([
+            'color',
+            'model',
+            'registration_number',
+            'year',
+            'mileage',
+            'price',
+        ]);
 
-        if ($request->getCar()->id) {
-            $request->getCar()->update($data);
+        $car = new Car($data);
 
-            return $request->getCar();
+        if ($id) {
+            $car->setId($id);
+            $car->update($data);
+
+            return $car;
         }
 
-        return $request->getUser()->cars()->create($data);
+        $car->save();
+
+        return $car;
     }
 
     /**

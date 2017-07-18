@@ -48,11 +48,17 @@ class UserManager implements UserManagerContract
      */
     public function saveUser(Request $request): User
     {
+        $data = $request->only([
+            'first_name',
+            'last_name',
+            'is_active',
+        ]);
+        /*
         $data = [
             'first_name' => $request->getFirstName(),
             'last_name' => $request->getLastName(),
             'is_active' => $request->getIsActive(),
-        ];
+        ];*/
 
         if ($request->getUser()->id) {
             $request->getUser()->update($data);

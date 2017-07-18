@@ -17,4 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'cars'], function () {
+    Route::get('/', 'CarController@index')->name('car-list');
+    Route::get('/create', 'CarController@create')->name('car-form');
+    Route::post('/', 'CarController@store')->name('car-store');
+    Route::get('/{id}/edit', 'CarController@edit')->name('car-edit');
+    Route::put('/{id}', 'CarController@update')->name('car-update');
+    Route::get('/{id}', 'CarController@show')->name('car-show');
+    Route::delete('/{id}', 'CarController@destroy')->name('car-destroy');
+});
