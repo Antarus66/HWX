@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableInterface;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable implements AuthenticatableInterface
 {
     public $timestamps = false;
 
@@ -17,6 +18,11 @@ class User extends Model
         'first_name',
         'last_name',
         'is_active',
+        'name', 'email', 'password',
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
     ];
 
     /**
