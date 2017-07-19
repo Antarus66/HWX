@@ -67,7 +67,17 @@ class Task3AuthorizationTest extends TestCase
             ->json('get', '/api/admin/cars/1')
             ->assertStatus(403);
 
-        // todo: check the rest of methods
+        $this->actingAs($this->user)
+            ->json('post', '/api/admin/cars')
+            ->assertStatus(403);
+
+        $this->actingAs($this->user)
+            ->json('put', '/api/admin/cars/1')
+            ->assertStatus(403);
+
+        $this->actingAs($this->user)
+            ->json('delete', '/api/admin/cars/1')
+            ->assertStatus(403);
     }
 
     public function testAdminCanAccessAdminApi()
@@ -82,6 +92,16 @@ class Task3AuthorizationTest extends TestCase
             ->json('get', '/api/admin/cars/1')
             ->assertStatus(200);
 
-        // todo: check the rest of methods
+        $this->actingAs($this->admin)
+            ->json('post', '/api/admin/cars')
+            ->assertStatus(200);
+
+        $this->actingAs($this->admin)
+            ->json('put', '/api/admin/cars/1')
+            ->assertStatus(200);
+
+        $this->actingAs($this->admin)
+            ->json('delete', '/api/admin/cars/1')
+            ->assertStatus(200);
     }
 }
