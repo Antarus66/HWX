@@ -5,8 +5,6 @@ namespace Tests\Browser;
 use App\Entity\User;
 use Illuminate\Support\Facades\Artisan;
 use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class Task1LoginTest extends DuskTestCase
 {

@@ -3,17 +3,19 @@
 namespace Tests\Browser;
 
 use App\Entity\User;
-use Illuminate\Support\Facades\Artisan;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\MigrateWithData;
 
 class Task3AuthorizationPagesTest extends DuskTestCase
 {
+    use MigrateWithData;
+
     public function setUp()
     {
         parent::setUp();
-        Artisan::call("migrate:refresh");
+
+        $this->migrateWithData();
     }
 
     private function createUser()

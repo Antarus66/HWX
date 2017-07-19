@@ -18,7 +18,9 @@ class User extends Authenticatable implements AuthenticatableInterface
         'first_name',
         'last_name',
         'is_active',
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password'
     ];
 
     protected $hidden = [
@@ -39,6 +41,6 @@ class User extends Authenticatable implements AuthenticatableInterface
 
     public function isAdmin()
     {
-        return false;
+        return true;
     }
 }
