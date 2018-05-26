@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
-class CarController extends \App\Http\Controllers\Api\Admin\CarController
+use App\Entity\Car;
+use App\Http\Controllers\Controller;
+use App\Manager\CarManager;
+
+class CarController extends Controller
 {
+    private $carManager;
+
     public function __construct(CarManager $carManager)
     {
         $this->carManager = $carManager;
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -16,6 +22,9 @@ class CarController extends \App\Http\Controllers\Api\Admin\CarController
      */
     public function getCarList()
     {
+        $car = new Car();
+        $this->authorize('create', $car);
+
         $cars = $this->carManager->findAll();
 
         return response()->json(
@@ -35,6 +44,7 @@ class CarController extends \App\Http\Controllers\Api\Admin\CarController
         if ($car === null) {
             return response('No', 404);
         } else {
+            $this->authorize('create', $car);
             return response()->json($car->toArray());
         }
     }

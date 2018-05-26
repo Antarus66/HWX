@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Entity\Car;
+use App\Policies\CarsPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -13,8 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
-        \App\Entity\Car::class => \App\Policies\CarsPolicy::class,
+        Car::class => CarsPolicy::class,
     ];
 
     /**

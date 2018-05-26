@@ -39,6 +39,18 @@ return [
             'prefix' => '',
         ],
 
+        'migrated' => [
+            'driver'   => 'sqlite',
+            'database' => database_path('migrated.sqlite'),
+            'prefix'   => '',
+        ],
+
+        'sqlite_testing' => [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),

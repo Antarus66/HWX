@@ -26,6 +26,9 @@ class CarController extends Controller
      */
     public function index()
     {
+        $car = new Car();
+        $this->authorize('create', $car);
+
         $cars = $this->carManager->findAll();
 
         return view('cars/index', ['cars' => $cars->toArray()]);

@@ -12,6 +12,6 @@ class CarsPolicy
 
     public function create(User $user, Car $car)
     {
-        return $user->isAdmin();
+        return false;
     }
 }
